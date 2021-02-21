@@ -34,7 +34,12 @@ class LoginActivity : AppCompatActivity() {
                     intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                     startActivity(intent)
                 }
-                .addOnFailureListener { sendToast("Failed to login: ${it.message}") }
+                .addOnFailureListener {
+                    sendToast("Failed to login: ${it.message}")
+                    val intent = Intent(this, LoginActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    startActivity(intent)
+                }
     }
 
     //sends short toast message to the user

@@ -41,28 +41,22 @@ class MainActivity : AppCompatActivity() {
         val uid = FirebaseAuth.getInstance().uid
         val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
         var profileImageUrl: String? = ""
-        //ref.key
 
         ref.addListenerForSingleValueEvent(object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 profileImageUrl = snapshot.child("profileImageUrL").getValue(String::class.java)
-                Log.d("test", profileImageUrl.toString())
+                if (profileImageUrl!!.isNotEmpty()){
+                    Picasso.get().load(profileImageUrl).into(activity_home_btn_profile);
+                }
+                else {
+                    activity_home_btn_profile.setImageResource(R.drawable.henk)
+                }
             }
 
             override fun onCancelled(error: DatabaseError) {
                 sendToast("Something went wrong")
             }
         })
-
-        //val storageRef = FirebaseStorage.getInstance().getReferenceFromUrl(profileImageUrl as fullUrl)
-
-        if (profileImageUrl!!.isNotEmpty()){
-            activity_home_btn_profile.setImageURI(Uri.parse(profileImageUrl.toString()))
-
-        }
-        else {
-            activity_home_btn_profile.setImageResource(R.drawable.henk)
-        }
     }
 
     fun verifyUserLoggedIn(){

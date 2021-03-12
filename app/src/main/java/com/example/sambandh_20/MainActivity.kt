@@ -39,12 +39,15 @@ class MainActivity : AppCompatActivity() {
     private fun setUserImage() {
         val uid = FirebaseAuth.getInstance().uid
         val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
-        var profileImageUrl: String? = ""
-
-        ref.addListenerForSingleValueEvent(object: ValueEventListener {
+        var user: User? = null
+        var profileImage : String = "";
+        ref.addValueEventListener(object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                profileImageUrl = snapshot.child("profileImageUrL").getValue(String::class.java)
-                Log.d("test", profileImageUrl.toString())
+                user = snapshot.getValue(User::class.java)
+                profileImage = user?.profileImageUrL.toString()
+                // activity_home_btn_profile.setImageURI(Uri.parse(profileImage))
+                Picasso.get().load(user?.profileImageUrL).into(activity_home_btn_profile)
+
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -52,13 +55,13 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        if (profileImageUrl!!.isNotEmpty()){
-            activity_home_btn_profile.setImageURI(Uri.parse(profileImageUrl.toString()))
-
-        }
-        else {
-            activity_home_btn_profile.setImageResource(R.drawable.henk)
-        }
+//        if (profileImage!!.isNotEmpty()){
+//            activity_home_btn_profile.setImageURI(Uri.parse(profileImage))
+//
+//        }
+//        else {
+//            activity_home_btn_profile.setImageResource(R.drawable.henk)
+//        }
     }
 
     fun verifyUserLoggedIn(){

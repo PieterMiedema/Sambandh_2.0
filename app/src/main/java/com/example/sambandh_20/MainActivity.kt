@@ -25,6 +25,7 @@ import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_register.*
+import java.net.URL
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,29 +40,23 @@ class MainActivity : AppCompatActivity() {
     private fun setUserImage() {
         val uid = FirebaseAuth.getInstance().uid
         val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
-        var user: User? = null
-        var profileImage : String = "";
-        ref.addValueEventListener(object: ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                user = snapshot.getValue(User::class.java)
-                profileImage = user?.profileImageUrL.toString()
-                // activity_home_btn_profile.setImageURI(Uri.parse(profileImage))
-                Picasso.get().load(user?.profileImageUrL).into(activity_home_btn_profile)
+        var profileImageUrl: String? = ""
 
+        ref.addListenerForSingleValueEvent(object: ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                profileImageUrl = snapshot.child("profileImageUrL").getValue(String::class.java)
+                if (profileImageUrl!!.isNotEmpty()){
+                    Picasso.get().load(profileImageUrl).into(activity_home_btn_profile);
+                }
+                else {
+                    activity_home_btn_profile.setImageResource(R.drawable.henk)
+                }
             }
 
             override fun onCancelled(error: DatabaseError) {
                 sendToast("Something went wrong")
             }
         })
-
-//        if (profileImage!!.isNotEmpty()){
-//            activity_home_btn_profile.setImageURI(Uri.parse(profileImage))
-//
-//        }
-//        else {
-//            activity_home_btn_profile.setImageResource(R.drawable.henk)
-//        }
     }
 
     fun verifyUserLoggedIn(){

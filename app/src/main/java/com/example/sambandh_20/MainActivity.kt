@@ -25,6 +25,7 @@ import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_register.*
+import java.net.URL
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,6 +41,7 @@ class MainActivity : AppCompatActivity() {
         val uid = FirebaseAuth.getInstance().uid
         val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
         var profileImageUrl: String? = ""
+        //ref.key
 
         ref.addListenerForSingleValueEvent(object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -51,6 +53,8 @@ class MainActivity : AppCompatActivity() {
                 sendToast("Something went wrong")
             }
         })
+
+        //val storageRef = FirebaseStorage.getInstance().getReferenceFromUrl(profileImageUrl as fullUrl)
 
         if (profileImageUrl!!.isNotEmpty()){
             activity_home_btn_profile.setImageURI(Uri.parse(profileImageUrl.toString()))

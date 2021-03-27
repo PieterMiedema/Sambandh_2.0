@@ -31,9 +31,6 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
         setUserImage()
     }
 
-
-
-
     private fun setUserImage() {
         val uid = FirebaseAuth.getInstance().uid
         val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
@@ -60,6 +57,6 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
     fun sendToast(message: String) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
-    }
+}
 
 

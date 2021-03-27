@@ -28,23 +28,6 @@ class MainActivity : AppCompatActivity() {
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.nav_view_bottom)
         val navController = findNavController(R.id.nav_host_fragment)
         bottomNavigationView.setupWithNavController(navController)
-
-        val homeFragment=HomeFragment()
-        val chatOverviewFragment=ChatOverviewFragment()
-    //    val thirdFragment=ThirdFragment()
-
-       // setCurrentFragment(homeFragment)
-
-        bottomNavigationView.setOnNavigationItemSelectedListener {
-            when(it.itemId){
-                R.id.bottom_nav_menu_navigation_home->setCurrentFragment(homeFragment)
-                R.id.bottom_nav_menu_navigation_chat->setCurrentFragment(chatOverviewFragment)
-               // R.id.settings->setCurrentFragment(thirdFragment)
-
-            }
-            true
-        }
-
     }
 
     private fun setCurrentFragment(fragment: Fragment)=
@@ -52,9 +35,6 @@ class MainActivity : AppCompatActivity() {
                 replace(R.id.nav_host_fragment,fragment)
                 commit()
             }
-
-
-
 
     fun verifyUserLoggedIn(){
         val uid = FirebaseAuth.getInstance().uid

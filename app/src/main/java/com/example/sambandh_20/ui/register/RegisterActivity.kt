@@ -118,7 +118,7 @@ class RegisterActivity : AppCompatActivity() {
         val dateObject: Date
 
         try{
-            var date= etDateOfBirthRegister.getText().toString()
+            var date= etDateOfBirthRegister.text.toString()
             dateObject = formatter.parse(date)
             date = SimpleDateFormat("dd/MM/yyyy").format(dateObject)
         }

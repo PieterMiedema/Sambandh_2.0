@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.sambandh_20.ui.home.HomeFragment"
+        android:label="HomeFragment" >
+        <action
+            android:id="@+id/action_homeFragment_to_chatOverviewFragment"
+            app:destination="@id/chatOverviewFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/chatOverviewFragment"
+        android:name="com.example.sambandh_20.chat.ChatOverviewFragment"
+        android:label="fragment_chat_overview"
+        tools:layout="@layout/fragment_chat_overview" >
+        <action
+            android:id="@+id/action_chatOverviewFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+</navigation>

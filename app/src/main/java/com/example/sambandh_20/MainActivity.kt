@@ -5,13 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import androidx.fragment.app.Fragment
-
-import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
-import com.example.sambandh_20.chat.ChatOverviewFragment
-import com.example.sambandh_20.ui.home.HomeFragment
 import com.example.sambandh_20.ui.login.LoginActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -24,17 +19,10 @@ class MainActivity : AppCompatActivity() {
         verifyUserLoggedIn()
         setContentView(R.layout.activity_main)
 
-
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.nav_view_bottom)
         val navController = findNavController(R.id.nav_host_fragment)
         bottomNavigationView.setupWithNavController(navController)
     }
-
-    private fun setCurrentFragment(fragment: Fragment)=
-            supportFragmentManager.beginTransaction().apply {
-                replace(R.id.nav_host_fragment,fragment)
-                commit()
-            }
 
     fun verifyUserLoggedIn(){
         val uid = FirebaseAuth.getInstance().uid
@@ -43,8 +31,6 @@ class MainActivity : AppCompatActivity() {
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
         }
-
-
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

@@ -1,4 +1,4 @@
-package com.example.sambandh_20.chat
+package com.example.sambandh_20.ui.chat
 
 
 import android.os.Bundle
@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import com.example.sambandh_20.R
 
 
-class ChatOverviewFragment : Fragment() {
+class ChatOverviewFragment : Fragment(R.layout.fragment_chat_overview) {
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,

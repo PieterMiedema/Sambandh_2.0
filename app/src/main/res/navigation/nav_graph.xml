@@ -14,7 +14,7 @@
     </fragment>
     <fragment
         android:id="@+id/bottom_nav_menu_navigation_chat"
-        android:name="com.example.sambandh_20.chat.ChatOverviewFragment"
+        android:name="com.example.sambandh_20.ui.chat.ChatOverviewFragment"
         android:label="fragment_chat_overview"
         tools:layout="@layout/fragment_chat_overview" />
 </navigation>

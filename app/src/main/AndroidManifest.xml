@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Sambandh_20">
-        <activity android:name=".chat.ChatOverviewFragment">
+        <activity android:name=".ui.chat.ChatOverviewFragment">
 <!--            <meta-data-->
 <!--                android:name="android.support.PARENT_ACTIVITY"-->
 <!--                android:value=".MainActivity"/>-->

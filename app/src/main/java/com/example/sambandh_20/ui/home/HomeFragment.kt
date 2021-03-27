@@ -16,7 +16,7 @@ import com.squareup.picasso.Picasso
 
 import kotlinx.android.synthetic.main.fragment_home.*
 
-class HomeFragment: Fragment() {
+class HomeFragment: Fragment(R.layout.fragment_home) {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,9 +28,8 @@ class HomeFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         setUserImage()
-        }
+    }
 
 
 

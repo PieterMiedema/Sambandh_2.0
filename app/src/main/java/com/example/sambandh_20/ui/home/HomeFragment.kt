@@ -1,11 +1,14 @@
 package com.example.sambandh_20.ui.home
 
 
+import android.content.Intent
 import android.os.Bundle
+import android.service.autofill.OnClickAction
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.sambandh_20.R
+import com.example.sambandh_20.ui.matches.MatchesOverviewActivity
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -28,6 +31,10 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        fragment_home_btn_matches.setOnClickListener {
+            val intent = Intent (getActivity(), MatchesOverviewActivity::class.java)
+            getActivity()?.startActivity(intent)
+        }
         setUserImage()
     }
 

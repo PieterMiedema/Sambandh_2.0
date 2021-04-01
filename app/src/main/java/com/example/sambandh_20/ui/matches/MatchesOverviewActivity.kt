@@ -1,11 +1,11 @@
 package com.example.sambandh_20.ui.matches
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import com.example.sambandh_20.R
 import com.example.sambandh_20.model.User
-import com.google.firebase.auth.FirebaseAuth
+import com.example.sambandh_20.ui.profile.MatchActivity
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -25,14 +25,12 @@ class MatchesOverviewActivity : AppCompatActivity() {
 
         supportActionBar?.title ="Your Matches"
         val adapter = GroupAdapter<ViewHolder>()
-//
-//        adapter.add(UserItem())
-//        adapter.add(UserItem())
-//        adapter.add(UserItem())
-
         rv_matches_activity_overview.adapter = adapter
-
         fetchUser()
+    }
+
+    companion object{
+        val USER_KEY = "USER_KEY"
     }
 
     private fun fetchUser(){
@@ -40,13 +38,22 @@ class MatchesOverviewActivity : AppCompatActivity() {
         ref.addListenerForSingleValueEvent(object: ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 val adapter = GroupAdapter<ViewHolder>()
-                snapshot.children.forEach({
-                    Log.d("TEST", it.toString())
+                snapshot.children.forEach {
                     val user = it.getValue(User::class.java)
-                    if (user != null){
+                    if (user != null) {
                         adapter.add(UserItem(user))
                     }
-                })
+                }
+                adapter.setOnItemClickListener { item, view ->
+
+                    val userItem = item as UserItem
+
+                    val intent = Intent(view.context, MatchActivity::class.java)
+                    //  intent.putExtra(USER_KEY,userItem.user.username)
+                    intent.putExtra(USER_KEY, userItem.user)
+                    startActivity(intent)
+//                    finish()
+                }
                 rv_matches_activity_overview.adapter = adapter
             }
 
@@ -67,8 +74,6 @@ class UserItem(val user: User): Item<ViewHolder>(){
         else {
             viewHolder.itemView.iv_match_row.setImageResource(R.drawable.henk)
         }
-//        Log.d("test", user.profileImageUrL)
-//        Picasso.get().load(user.profileImageUrL).into(viewHolder.itemView.iv_new_message_row)
     }
     override fun getLayout(): Int {
         return R.layout.user_row_new_message

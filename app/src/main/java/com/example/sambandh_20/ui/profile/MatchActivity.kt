@@ -1,14 +1,15 @@
 package com.example.sambandh_20.ui.profile
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.example.sambandh_20.R
 import com.example.sambandh_20.model.User
+import com.example.sambandh_20.ui.chat.ChatActivity
 import com.example.sambandh_20.ui.matches.MatchesOverviewActivity
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_match.*
-import java.io.Console
 
 class MatchActivity : AppCompatActivity() {
 
@@ -19,7 +20,15 @@ class MatchActivity : AppCompatActivity() {
         user = intent.getParcelableExtra<User>(MatchesOverviewActivity.USER_KEY)
         supportActionBar?.title = user?.displayName+"'s profile"
         Log.d("user", user.toString())
+
         fillProfile()
+
+        gotochat.setOnClickListener {
+            val intent = Intent(this, ChatActivity::class.java)
+            intent.putExtra(MatchesOverviewActivity.USER_KEY, user)
+            startActivity(intent)
+        }
+
     }
 
     private fun fillProfile() {

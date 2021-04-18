@@ -22,14 +22,14 @@ class MatchesOverviewActivity : AppCompatActivity() {
         supportActionBar?.title ="Your Matches"
         val adapter = GroupAdapter<ViewHolder>()
         rv_matches_activity_overview.adapter = adapter
-        fetchUser()
+        fetchUsers()
     }
 
     companion object{
         val USER_KEY = "USER_KEY"
     }
 
-    private fun fetchUser(){
+    private fun fetchUsers(){
         val ref = FirebaseDatabase.getInstance().getReference("/users")
         ref.addListenerForSingleValueEvent(object: ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {

@@ -11,21 +11,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
-<!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
-<!--        android:id="@+id/nav_view_bottom"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:background="?android:attr/windowBackground"-->
-<!--        app:itemTextColor="@drawable/theme_bottom_nav_color"-->
-<!--        app:itemIconTint="@drawable/theme_bottom_nav_color"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintLeft_toLeftOf="parent"-->
-<!--        app:layout_constraintRight_toRightOf="parent"-->
-<!--        app:labelVisibilityMode="labeled"-->
-<!--        app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"-->
-<!--        app:menu="@menu/bottom_nav_menu" />-->
     <com.tbuonomo.morphbottomnavigation.MorphBottomNavigationView
         android:id="@+id/nav_view_bottom"
         android:layout_width="match_parent"

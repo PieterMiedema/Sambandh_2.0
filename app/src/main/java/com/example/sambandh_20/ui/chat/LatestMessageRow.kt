@@ -1,5 +1,6 @@
 package com.example.sambandh_20.ui.chat
 
+import android.util.Log
 import com.example.sambandh_20.R
 import com.example.sambandh_20.model.ChatMessage
 import com.example.sambandh_20.model.User
@@ -26,6 +27,7 @@ class LatestMessageRow(val chatMessage: ChatMessage): Item<ViewHolder>() {
         } else {
             chatPatnerId = chatMessage.fromId
         }
+        Log.d("test", chatPatnerId)
         val ref = FirebaseDatabase.getInstance().getReference("/users/$chatPatnerId")
         ref.addListenerForSingleValueEvent(object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {

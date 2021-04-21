@@ -37,12 +37,13 @@ class ChatOverviewFragment : Fragment(R.layout.fragment_chat_overview) {
         rv_latest_messages.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
 
         adapter.setOnItemClickListener { item, view ->
-            val intent = Intent(context, ChatActivity::class.java)
+            val intent = Intent(requireActivity(), ChatActivity::class.java)
 
             val row = item as LatestMessageRow
 
             intent.putExtra(MatchesOverviewActivity.USER_KEY, row.chatPartnerUser)
             startActivity(intent)
+            
         }
 
         listenForLatestMessages()

@@ -61,12 +61,17 @@ class ChatActivity : AppCompatActivity() {
 
     private fun performSendMessage() {
         val text = et_chat_log.text.toString()
+
+        if (text.isNullOrBlank()) return
+
         val fromId = FirebaseAuth.getInstance().uid
         val user = intent.getParcelableExtra<User>(MatchesOverviewActivity.USER_KEY)
         val toId = user!!.uid
         val reference = FirebaseDatabase.getInstance().getReference("/user-messages/$fromId/$toId").push()
         val toReference = FirebaseDatabase.getInstance().getReference("/user-messages/$toId/$fromId").push()
+
         if (fromId == null) return
+
         val chatMessage =
                 ChatMessage(reference.key!!, text, fromId, toId, System.currentTimeMillis() / 1000)
         reference.setValue(chatMessage)

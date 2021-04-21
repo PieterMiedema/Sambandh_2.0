@@ -13,6 +13,10 @@
         <activity
             android:name=".ui.chat.ChatActivity"
             android:label="@string/title_activity_chat" >
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.matches.MatchesOverviewActivity" />
         </activity>
         <activity android:name=".ui.profile.MatchActivity" >
             <meta-data

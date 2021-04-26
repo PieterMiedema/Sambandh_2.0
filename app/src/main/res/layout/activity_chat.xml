@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -18,33 +17,54 @@
         android:ems="10"
         android:hint="Enter Message"
         android:inputType="textPersonName"
+        android:paddingStart="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btn_send_chat_log"
+        app:layout_constraintEnd_toStartOf="@+id/btn_send_media"
         app:layout_constraintStart_toStartOf="parent" />
 
     <android.widget.Button
         android:id="@+id/btn_send_chat_log"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/rounded_button"
-        android:text="Send"
+        android:background="@drawable/ic_baseline_send_24"
+        android:backgroundTint="@color/india_green"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@+id/btn_send_media"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btn_send_media" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_chat_log"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="8dp"
-        android:background="@android:color/holo_red_dark"
+        android:background="@drawable/orange_gradient"
+        android:padding="8dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toTopOf="@+id/et_chat_log"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
+
+    <ImageButton
+        android:id="@+id/btn_send_media"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@drawable/ic_baseline_attach_file_24"
+        android:rotation="180"
+        app:layout_constraintBottom_toBottomOf="@+id/et_chat_log"
+        app:layout_constraintEnd_toStartOf="@+id/btn_send_chat_log"
+        app:layout_constraintTop_toTopOf="@+id/et_chat_log" />
+
+    <ImageView
+        android:id="@+id/iv_send_media"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_send_chat_log"
+        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

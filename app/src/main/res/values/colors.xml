@@ -11,6 +11,8 @@
     <color name="orangePrimary">#FF9933</color>
     <color name="orangeDark">#D84315</color>
     <color name="yellowAccent">#FFD600</color>
+    <color name="india_green">#19be0b</color>
+    <color name="india_orange">#ff9933</color>
 
 
 </resources>

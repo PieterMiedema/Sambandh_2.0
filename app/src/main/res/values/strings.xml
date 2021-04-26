@@ -1,29 +1,25 @@
 <resources>
-    <string name="app_name">Sambandh_2.0</string>
-    <string name="activity_home_btn_profile">Edit PRofile</string>
+    <string name="app_name">Sambandh</string>
+    <string name="activity_home_btn_profile">Edit Profile</string>
     <string name="activity_home_txt_chat">Chat</string>
     <string name="activity_home_txt_profile">Profile</string>
     <string name="activity_home_txt_match">Matches</string>
     <string name="activity_splash_txt_apptitle">Sambandh</string>
     <string name="activity_home_txt_account">Account</string>
-    <string name="activity_home_btn__account_description">Goto Account</string>
+    <string name="activity_home_btn__account_description">Go to Account</string>
     <string name="bottom_nav_menu_navigation_home">Home</string>
     <string name="bottom_nav_menu_navigation_chat">Chat</string>
-    <string name="bottom_nav_menu_navigation_account">Acount</string>
+    <string name="bottom_nav_menu_navigation_account">Account</string>
     <string name="title_activity_match">Match</string>
-    <!--
-    This string is used for square devices and overridden by hello_world in
-    values-round/strings.xml for round devices.
-    -->
-    <string name="hello_world">Hello Square World!</string>
-    <string name="title_activity_login">LoginActivity</string>
+
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
-    <string name="welcome">"Welcome !"</string>
+    <string name="welcome">"Welcome!"</string>
     <string name="invalid_username">Not a valid username</string>
-    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="invalid_password">Password must be at least 6 characters long</string>
     <string name="login_failed">"Login failed"</string>
     <string name="title_activity_chat">ChatActivity</string>
+
 </resources>

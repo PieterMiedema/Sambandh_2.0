@@ -1,6 +1,12 @@
 package com.example.sambandh_20.ui.chat
 
+import android.Manifest
+import android.app.Activity
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.sambandh_20.R
 import com.example.sambandh_20.model.ChatMessage
@@ -19,6 +25,13 @@ class ChatActivity : AppCompatActivity() {
 
     val adapter = GroupAdapter<ViewHolder>()
     var toUser: User? = null
+
+    companion object {
+        private val IMAGE_PICK_CODE = 1000
+        private val PERMISSION_CODE = 1001
+        //private val test = TFRequestCodes
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
@@ -30,7 +43,58 @@ class ChatActivity : AppCompatActivity() {
         btn_send_chat_log.setOnClickListener {
             performSendMessage()
         }
+
+        btn_send_media.setOnClickListener {
+            //check runtime permission
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                if (checkSelfPermission(Manifest.permission.ACCESS_MEDIA_LOCATION) ==
+                    PackageManager.PERMISSION_DENIED){
+                    //permission denied
+                    val permissions = arrayOf(Manifest.permission.ACCESS_MEDIA_LOCATION);
+                    //show popup to request runtime permission
+                    requestPermissions(permissions, PERMISSION_CODE);
+                }
+                else{
+                    //permission already granted
+                    pickImageFromGallery();
+                }
+            }
+            else{
+                //system OS is < Marshmallow
+                pickImageFromGallery();
+            }
+        }
     }
+
+    private fun pickImageFromGallery() {
+        val intent = Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI)
+        //intent.type = "image/*"
+        startActivityForResult(intent, IMAGE_PICK_CODE)
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        when(requestCode) {
+            PERMISSION_CODE -> {
+                if (grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    //permission from popup granted
+                    pickImageFromGallery()
+                }
+                else{
+                    sendToast("Permission denied")
+                }
+            }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK && requestCode == IMAGE_PICK_CODE){
+            iv_send_media.setImageURI(data?.data)
+        }
+    }
+
     private fun ListenForMessages() {
         val fromId = FirebaseAuth.getInstance().uid
         val toId = toUser?.uid
@@ -85,7 +149,10 @@ class ChatActivity : AppCompatActivity() {
         val latestMessageToRef = FirebaseDatabase.getInstance().getReference("/latest-messages/$toId/$fromId")
         latestMessageToRef.setValue(chatMessage)
     }
+
+    //sends short toast message to the user
+    fun sendToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
 }
-
-
 

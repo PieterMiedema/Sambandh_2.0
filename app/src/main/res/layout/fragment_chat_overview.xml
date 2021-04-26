@@ -14,15 +14,4 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
-    <com.tbuonomo.morphbottomnavigation.MorphBottomNavigationView
-        android:id="@+id/nav_view_bottom"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:menu="@menu/bottom_nav_menu"
-        app:backgroundTint="@color/yellowAccent"
-        app:morphCornerRadius="128dp"
-        app:morphItemRadius="64dp"
-        app:morphVerticalOffset="8dp"
-        />
 </androidx.constraintlayout.widget.ConstraintLayout>

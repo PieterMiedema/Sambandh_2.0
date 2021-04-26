@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_red_dark"
+    android:background="@drawable/orange_gradient"
     tools:context=".ui.register.RegisterActivity">
 
     <EditText
@@ -102,6 +102,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:background="@drawable/rounded_button"
+        android:backgroundTint="@color/india_green"
         android:text="Register"
         app:layout_constraintEnd_toEndOf="@+id/etLastNameRegister"
         app:layout_constraintHorizontal_bias="1.0"
@@ -128,6 +129,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginBottom="32dp"
         android:background="@drawable/round_button_image_login"
+        android:backgroundTint="@color/india_green"
         android:text="select profile picture"
         app:layout_constraintBottom_toTopOf="@+id/etDisplayNameRegister"
         app:layout_constraintEnd_toEndOf="parent"
@@ -138,6 +140,7 @@
         android:id="@+id/select_phote_imageview_register"
         android:layout_width="150dp"
         android:layout_height="150dp"
+        android:backgroundTint="#FFFFFF"
         app:civ_border_width="4dp"
         app:layout_constraintBottom_toBottomOf="@+id/btn_image_register"
         app:layout_constraintEnd_toEndOf="@+id/btn_image_register" />

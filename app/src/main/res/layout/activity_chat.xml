@@ -65,5 +65,6 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/btn_send_chat_log"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:maxWidth="200dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

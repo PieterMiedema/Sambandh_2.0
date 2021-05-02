@@ -20,7 +20,11 @@ class LatestMessageRow(val chatMessage: ChatMessage): Item<ViewHolder>() {
         return R.layout.latest_message_item
     }
     override fun bind(viewHolder: ViewHolder, position: Int) {
-        viewHolder.itemView.tv_latest_message_latest_message.text = chatMessage.text
+        if (chatMessage.text.isNotBlank()) {
+            viewHolder.itemView.tv_latest_message_latest_message.text = chatMessage.text
+        } else if (chatMessage.mediaLink.isNotBlank()) {
+            viewHolder.itemView.tv_latest_message_latest_message.text = "Image"
+        }
         val chatPatnerId: String
         if (chatMessage.fromId == FirebaseAuth.getInstance().uid) {
             chatPatnerId = chatMessage.toId

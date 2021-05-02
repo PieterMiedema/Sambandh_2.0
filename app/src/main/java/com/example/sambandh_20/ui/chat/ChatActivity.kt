@@ -4,8 +4,10 @@ import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.sambandh_20.R
@@ -17,19 +19,18 @@ import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.storage.FirebaseStorage
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.activity_chat.*
+import kotlinx.android.synthetic.main.activity_register.*
+import java.util.*
 
 class ChatActivity : AppCompatActivity() {
 
     val adapter = GroupAdapter<ViewHolder>()
     var toUser: User? = null
-
-    companion object {
-        private val IMAGE_PICK_CODE = 1000
-        private val PERMISSION_CODE = 1001
-    }
+    var selectedPhotoUri: Uri? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,58 +41,41 @@ class ChatActivity : AppCompatActivity() {
 
         ListenForMessages()
         btn_send_chat_log.setOnClickListener {
-            performSendMessage()
+            if (selectedPhotoUri != null) {
+                upLoadImageToFirebaseStorage()
+            } else {
+                performSendMessage("")
+            }
         }
 
         btn_send_media.setOnClickListener {
-            //check runtime permission
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-                if (checkSelfPermission(Manifest.permission.ACCESS_MEDIA_LOCATION) ==
-                    PackageManager.PERMISSION_DENIED){
-                    //permission denied
-                    val permissions = arrayOf(Manifest.permission.ACCESS_MEDIA_LOCATION);
-                    //show popup to request runtime permission
-                    requestPermissions(permissions, PERMISSION_CODE);
-                }
-                else{
-                    //permission already granted
-                    pickImageFromGallery();
-                }
-            }
-            else{
-                //system OS is < Marshmallow
-                pickImageFromGallery();
-            }
-        }
-    }
-
-    private fun pickImageFromGallery() {
-        val intent = Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI)
-        //intent.type = "image/*"
-        startActivityForResult(intent, IMAGE_PICK_CODE)
-    }
-
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-
-        when(requestCode) {
-            PERMISSION_CODE -> {
-                if (grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    //permission from popup granted
-                    pickImageFromGallery()
-                }
-                else{
-                    sendToast("Permission denied")
-                }
-            }
+            val intent = Intent(Intent.ACTION_PICK)
+            intent.type ="image/*"
+            startActivityForResult(intent, 0)
         }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK && requestCode == IMAGE_PICK_CODE){
-            iv_send_media.setImageURI(data?.data)
+
+        if (requestCode == 0 && resultCode == Activity.RESULT_OK && data != null){
+            selectedPhotoUri = data.data
+
+            val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, selectedPhotoUri)
+            iv_send_media.setImageBitmap(bitmap)
         }
+    }
+
+    private fun upLoadImageToFirebaseStorage(){
+        val filename = UUID.randomUUID().toString()
+        val ref = FirebaseStorage.getInstance().getReference("/images/$filename")
+
+        ref.putFile(selectedPhotoUri!!)
+                .addOnSuccessListener {
+                    ref.downloadUrl.addOnSuccessListener {
+                        performSendMessage(it.toString())
+                    }
+                }
     }
 
     private fun ListenForMessages() {
@@ -131,16 +115,14 @@ class ChatActivity : AppCompatActivity() {
         })
     }
 
-    private fun performSendMessage() {
+    private fun performSendMessage(imageUrl: String) {
         val text = et_chat_log.text.toString()
 
-        if (text.isNullOrBlank()) return
+        if (text.isNullOrBlank() && imageUrl.isNullOrBlank()) return
 
         val fromId = FirebaseAuth.getInstance().uid
         val user = intent.getParcelableExtra<User>(MatchesOverviewActivity.USER_KEY)
         val toId = user!!.uid
-
-        val imageUrl = ""
 
         val reference = FirebaseDatabase.getInstance().getReference("/user-messages/$fromId/$toId").push()
         val toReference = FirebaseDatabase.getInstance().getReference("/user-messages/$toId/$fromId").push()
@@ -155,15 +137,13 @@ class ChatActivity : AppCompatActivity() {
                     rv_chat_log.scrollToPosition(adapter.itemCount -1)
                 }
         toReference.setValue(chatMessage)
+
         val latestMessageRef = FirebaseDatabase.getInstance().getReference("/latest-messages/$fromId/$toId")
         latestMessageRef.setValue(chatMessage)
         val latestMessageToRef = FirebaseDatabase.getInstance().getReference("/latest-messages/$toId/$fromId")
         latestMessageToRef.setValue(chatMessage)
-    }
 
-    //sends short toast message to the user
-    fun sendToast(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+        iv_send_media.setImageBitmap(null)
     }
 }
 

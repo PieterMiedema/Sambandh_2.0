@@ -7,6 +7,7 @@ import android.util.Log
 import com.example.sambandh_20.R
 import com.example.sambandh_20.model.User
 import com.example.sambandh_20.ui.chat.ChatActivity
+import com.example.sambandh_20.ui.chat.LatestMessageRow
 import com.example.sambandh_20.ui.matches.MatchesOverviewActivity
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_match.*
@@ -28,7 +29,6 @@ class MatchActivity : AppCompatActivity() {
             intent.putExtra(MatchesOverviewActivity.USER_KEY, user)
             startActivity(intent)
         }
-
     }
 
     private fun fillProfile() {

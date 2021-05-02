@@ -53,8 +53,7 @@
         android:id="@+id/btn_send_media"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:background="@drawable/ic_baseline_attach_file_24"
-        android:rotation="180"
+        android:background="@drawable/ic_baseline_camera_alt_24"
         app:layout_constraintBottom_toBottomOf="@+id/et_chat_log"
         app:layout_constraintEnd_toStartOf="@+id/btn_send_chat_log"
         app:layout_constraintTop_toTopOf="@+id/et_chat_log" />

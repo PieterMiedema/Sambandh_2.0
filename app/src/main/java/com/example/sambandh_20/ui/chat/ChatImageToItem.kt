@@ -5,11 +5,15 @@ import com.example.sambandh_20.model.User
 import com.squareup.picasso.Picasso
 import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
-import kotlinx.android.synthetic.main.chat_message_to_row_left.view.*
+import kotlinx.android.synthetic.main.chat_image_to_row_left.view.*
 
-class ChatToItem(val text: String, val user: User) : Item<ViewHolder>() {
+class ChatImageToItem(val mediaLink: String, val user: User) : Item<ViewHolder>() {
     override fun bind(viewHolder: ViewHolder, position: Int) {
-        viewHolder.itemView.tv_chat_to_row_left.text = text
+        val targetImageViewMedia = viewHolder.itemView.iv_chat_image_to_row_left
+        val sentImageUrl = mediaLink
+        if (sentImageUrl!!.isNotEmpty()){
+            Picasso.get().load(sentImageUrl).into(targetImageViewMedia)
+        }
 
         val targetImageView = viewHolder.itemView.iv_chat_to_row_left
         val profileImageUrl = user?.profileImageUrL
@@ -21,6 +25,6 @@ class ChatToItem(val text: String, val user: User) : Item<ViewHolder>() {
         }
     }
     override fun getLayout(): Int {
-        return R.layout.chat_message_to_row_left
+        return R.layout.chat_image_to_row_left
     }
 }

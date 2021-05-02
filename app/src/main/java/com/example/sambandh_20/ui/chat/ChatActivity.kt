@@ -29,7 +29,6 @@ class ChatActivity : AppCompatActivity() {
     companion object {
         private val IMAGE_PICK_CODE = 1000
         private val PERMISSION_CODE = 1001
-        //private val test = TFRequestCodes
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -103,11 +102,20 @@ class ChatActivity : AppCompatActivity() {
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
                 val chatMessage = snapshot.getValue(ChatMessage::class.java)
                 if (chatMessage != null) {
-                    if (chatMessage.fromId == FirebaseAuth.getInstance().uid) {
-                        val currentUser = ChatOverviewFragment.currentUser ?: return
-                        adapter.add(ChatFromItem(chatMessage.text, currentUser))
-                    } else {
-                        adapter.add(ChatToItem(chatMessage.text, toUser!!))
+                    if (chatMessage.text.isNotBlank()) {
+                        if (chatMessage.fromId == FirebaseAuth.getInstance().uid) {
+                            val currentUser = ChatOverviewFragment.currentUser ?: return
+                            adapter.add(ChatFromItem(chatMessage.text, currentUser))
+                        } else {
+                            adapter.add(ChatToItem(chatMessage.text, toUser!!))
+                        }
+                    } else if (chatMessage.mediaLink.isNotBlank()) {
+                        if (chatMessage.fromId == FirebaseAuth.getInstance().uid) {
+                            val currentUser = ChatOverviewFragment.currentUser ?: return
+                            adapter.add(ChatImageFromItem(chatMessage.mediaLink, currentUser))
+                        } else {
+                            adapter.add(ChatImageToItem(chatMessage.mediaLink, toUser!!))
+                        }
                     }
                 }
                 rv_chat_log.scrollToPosition(adapter.itemCount -1)
@@ -131,13 +139,16 @@ class ChatActivity : AppCompatActivity() {
         val fromId = FirebaseAuth.getInstance().uid
         val user = intent.getParcelableExtra<User>(MatchesOverviewActivity.USER_KEY)
         val toId = user!!.uid
+
+        val imageUrl = ""
+
         val reference = FirebaseDatabase.getInstance().getReference("/user-messages/$fromId/$toId").push()
         val toReference = FirebaseDatabase.getInstance().getReference("/user-messages/$toId/$fromId").push()
 
         if (fromId == null) return
 
         val chatMessage =
-                ChatMessage(reference.key!!, text, fromId, toId, System.currentTimeMillis() / 1000)
+                ChatMessage(reference.key!!, text, fromId, toId, imageUrl, System.currentTimeMillis() / 1000)
         reference.setValue(chatMessage)
                 .addOnSuccessListener {
                     et_chat_log.text.clear()

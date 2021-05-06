@@ -98,12 +98,10 @@ class RegisterActivity : AppCompatActivity() {
     private fun saveUserToFirebaseDatabase(profileImageUrL: String){
         val uid = FirebaseAuth.getInstance().uid ?: ""
         val displayName = etDisplayNameRegister.text.toString()
-        val firstName = etFirstNameRegister.text.toString()
-        val lastName = etLastNameRegister.text.toString()
         val dateOfBirth = etDateOfBirthRegister.text.toString()
         val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
 
-        val user = User(uid, profileImageUrL, displayName, firstName, lastName, dateOfBirth)
+        val user = User(uid, profileImageUrL, displayName,  dateOfBirth)
         ref.setValue(user)
             .addOnSuccessListener {
                 val intent = Intent(this, MainActivity::class.java)

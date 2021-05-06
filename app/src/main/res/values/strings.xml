@@ -9,7 +9,7 @@
     <string name="activity_home_btn__account_description">Go to Account</string>
     <string name="bottom_nav_menu_navigation_home">Home</string>
     <string name="bottom_nav_menu_navigation_chat">Chat</string>
-    <string name="bottom_nav_menu_navigation_account">Account</string>
+    <string name="bottom_nav_menu_navigation_preferences">Preferences</string>
     <string name="title_activity_match">Match</string>
 
     <string name="prompt_email">Email</string>
@@ -21,5 +21,5 @@
     <string name="invalid_password">Password must be at least 6 characters long</string>
     <string name="login_failed">"Login failed"</string>
     <string name="title_activity_chat">ChatActivity</string>
-
+    <string name="register_datebirth">Date of birth (dd/mm/yyyy)*</string>
 </resources>

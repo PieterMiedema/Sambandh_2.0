@@ -24,47 +24,18 @@
         app:layout_constraintTop_toBottomOf="@+id/btn_image_register" />
 
     <EditText
-        android:id="@+id/etFirstNameRegister"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/rounded_edittext_register_login"
-        android:ems="10"
-        android:hint="First name"
-        android:inputType="text"
-        android:paddingLeft="16dp"
-        app:layout_constraintEnd_toEndOf="@+id/etDisplayNameRegister"
-        app:layout_constraintStart_toStartOf="@+id/etDisplayNameRegister"
-        app:layout_constraintTop_toBottomOf="@+id/etDisplayNameRegister" />
-
-    <EditText
-        android:id="@+id/etLastNameRegister"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/rounded_edittext_register_login"
-        android:ems="10"
-        android:hint="Last name"
-        android:inputType="text"
-        android:paddingLeft="16dp"
-        app:layout_constraintEnd_toEndOf="@+id/etFirstNameRegister"
-        app:layout_constraintStart_toStartOf="@+id/etFirstNameRegister"
-        app:layout_constraintTop_toBottomOf="@+id/etFirstNameRegister" />
-
-    <EditText
         android:id="@+id/etDateOfBirthRegister"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/rounded_edittext_register_login"
         android:ems="10"
-        android:hint="Date of birth*"
+        android:hint="@string/register_datebirth"
         android:inputType="text"
         android:paddingLeft="16dp"
-        app:layout_constraintEnd_toEndOf="@+id/etFirstNameRegister"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/etFirstNameRegister"
-        app:layout_constraintTop_toBottomOf="@+id/etLastNameRegister" />
+        app:layout_constraintEnd_toEndOf="@+id/etDisplayNameRegister"
+        app:layout_constraintStart_toStartOf="@+id/etDisplayNameRegister"
+        app:layout_constraintTop_toBottomOf="@+id/etDisplayNameRegister" />
 
     <EditText
         android:id="@+id/etEmailRegister"
@@ -76,9 +47,8 @@
         android:hint="E-mail*"
         android:inputType="text"
         android:paddingLeft="16dp"
-        app:layout_constraintEnd_toEndOf="@+id/etFirstNameRegister"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/etFirstNameRegister"
+        app:layout_constraintEnd_toEndOf="@+id/etDateOfBirthRegister"
+        app:layout_constraintStart_toStartOf="@+id/etDateOfBirthRegister"
         app:layout_constraintTop_toBottomOf="@+id/etDateOfBirthRegister" />
 
     <EditText
@@ -91,9 +61,8 @@
         android:hint="Password*"
         android:inputType="textPassword"
         android:paddingLeft="16dp"
-        app:layout_constraintEnd_toEndOf="@+id/etFirstNameRegister"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/etFirstNameRegister"
+        app:layout_constraintEnd_toEndOf="@+id/etEmailRegister"
+        app:layout_constraintStart_toStartOf="@+id/etEmailRegister"
         app:layout_constraintTop_toBottomOf="@+id/etEmailRegister" />
 
     <android.widget.Button
@@ -104,9 +73,8 @@
         android:background="@drawable/rounded_button"
         android:backgroundTint="@color/india_green"
         android:text="Register"
-        app:layout_constraintEnd_toEndOf="@+id/etLastNameRegister"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/etLastNameRegister"
+        app:layout_constraintEnd_toEndOf="@+id/etPasswordRegister"
+        app:layout_constraintStart_toStartOf="@+id/etPasswordRegister"
         app:layout_constraintTop_toBottomOf="@+id/etPasswordRegister" />
 
     <TextView

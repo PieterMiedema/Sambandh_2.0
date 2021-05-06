@@ -7,12 +7,12 @@ import android.util.Log
 import com.example.sambandh_20.R
 import com.example.sambandh_20.model.User
 import com.example.sambandh_20.ui.chat.ChatActivity
-import com.example.sambandh_20.ui.chat.LatestMessageRow
 import com.example.sambandh_20.ui.matches.MatchesOverviewActivity
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_match.*
 
 class MatchActivity : AppCompatActivity() {
+
 
     var user: User? = null
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,6 +38,7 @@ class MatchActivity : AppCompatActivity() {
         else {
             imageview_match_profile.setImageResource(R.drawable.henk)
         }
+        tv_match_profile_name.text= user?.displayName
     }
 
 }

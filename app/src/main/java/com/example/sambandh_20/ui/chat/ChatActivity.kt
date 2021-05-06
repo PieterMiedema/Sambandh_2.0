@@ -13,12 +13,10 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.sambandh_20.R
 import com.example.sambandh_20.model.ChatMessage
 import com.example.sambandh_20.model.User
+import com.example.sambandh_20.ui.chat.ChatOverviewFragment.Companion.currentUser
 import com.example.sambandh_20.ui.matches.MatchesOverviewActivity
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.ChildEventListener
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder
@@ -28,8 +26,12 @@ import java.util.*
 
 class ChatActivity : AppCompatActivity() {
 
+    companion object{
+        var currentUser: User? = null
+    }
     val adapter = GroupAdapter<ViewHolder>()
     var toUser: User? = null
+
     var selectedPhotoUri: Uri? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,7 +40,7 @@ class ChatActivity : AppCompatActivity() {
         rv_chat_log.adapter = adapter
         toUser = intent.getParcelableExtra<User>(MatchesOverviewActivity.USER_KEY)
         supportActionBar?.title = toUser?.displayName
-
+        fetchCurrentUser()
         ListenForMessages()
         btn_send_chat_log.setOnClickListener {
             if (selectedPhotoUri != null) {
@@ -87,15 +89,15 @@ class ChatActivity : AppCompatActivity() {
                 val chatMessage = snapshot.getValue(ChatMessage::class.java)
                 if (chatMessage != null) {
                     if (chatMessage.text.isNotBlank()) {
-                        if (chatMessage.fromId == FirebaseAuth.getInstance().uid) {
-                            val currentUser = ChatOverviewFragment.currentUser ?: return
+                        if (chatMessage.fromId == currentUser?.uid) {
+                            val currentUser = currentUser ?: return
                             adapter.add(ChatFromItem(chatMessage.text, currentUser))
                         } else {
                             adapter.add(ChatToItem(chatMessage.text, toUser!!))
                         }
                     } else if (chatMessage.mediaLink.isNotBlank()) {
                         if (chatMessage.fromId == FirebaseAuth.getInstance().uid) {
-                            val currentUser = ChatOverviewFragment.currentUser ?: return
+                            val currentUser = currentUser ?: return
                             adapter.add(ChatImageFromItem(chatMessage.mediaLink, currentUser))
                         } else {
                             adapter.add(ChatImageToItem(chatMessage.mediaLink, toUser!!))
@@ -144,6 +146,19 @@ class ChatActivity : AppCompatActivity() {
         latestMessageToRef.setValue(chatMessage)
 
         iv_send_media.setImageBitmap(null)
+    }
+
+    private fun fetchCurrentUser() {
+        val uid = FirebaseAuth.getInstance().uid
+        val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
+        ref.addListenerForSingleValueEvent(object: ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                currentUser = snapshot.getValue(User::class.java)
+
+            }
+            override fun onCancelled(error: DatabaseError) {
+            }
+        })
     }
 }
 

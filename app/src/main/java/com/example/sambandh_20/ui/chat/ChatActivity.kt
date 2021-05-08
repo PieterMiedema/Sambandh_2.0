@@ -1,19 +1,14 @@
 package com.example.sambandh_20.ui.chat
 
-import android.Manifest
 import android.app.Activity
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.sambandh_20.R
 import com.example.sambandh_20.model.ChatMessage
 import com.example.sambandh_20.model.User
-import com.example.sambandh_20.ui.chat.ChatOverviewFragment.Companion.currentUser
 import com.example.sambandh_20.ui.matches.MatchesOverviewActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
@@ -21,8 +16,8 @@ import com.google.firebase.storage.FirebaseStorage
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.activity_chat.*
-import kotlinx.android.synthetic.main.activity_register.*
 import java.util.*
+
 
 class ChatActivity : AppCompatActivity() {
 
@@ -32,7 +27,7 @@ class ChatActivity : AppCompatActivity() {
     val adapter = GroupAdapter<ViewHolder>()
     var toUser: User? = null
 
-    var selectedPhotoUri: Uri? = null
+    var selectedMediaUri: Uri? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,18 +37,23 @@ class ChatActivity : AppCompatActivity() {
         supportActionBar?.title = toUser?.displayName
         fetchCurrentUser()
         ListenForMessages()
+
         btn_send_chat_log.setOnClickListener {
-            if (selectedPhotoUri != null) {
-                upLoadImageToFirebaseStorage()
+            if (selectedMediaUri != null) {
+                if (selectedMediaUri.toString().contains("image")) {
+                    upLoadImageToFirebaseStorage()
+                } else  if (selectedMediaUri.toString().contains("video")) {
+                    upLoadVideoToFirebaseStorage()
+                }
             } else {
                 performSendMessage("")
             }
         }
 
         btn_send_media.setOnClickListener {
-            val intent = Intent(Intent.ACTION_PICK)
-            intent.type ="image/*"
-            startActivityForResult(intent, 0)
+            val pickIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+            pickIntent.type = "image/* video/*"
+            startActivityForResult(pickIntent, 0)
         }
     }
 
@@ -61,18 +61,33 @@ class ChatActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == 0 && resultCode == Activity.RESULT_OK && data != null){
-            selectedPhotoUri = data.data
+            selectedMediaUri = data.data
+            if (selectedMediaUri.toString().contains("image")) {
+                val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, selectedMediaUri)
+                iv_send_image.setImageBitmap(bitmap)
+            } else  if (selectedMediaUri.toString().contains("video")) {
 
-            val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, selectedPhotoUri)
-            iv_send_media.setImageBitmap(bitmap)
+                iv_send_video.setVideoURI(selectedMediaUri)
+            }
+
         }
     }
 
     private fun upLoadImageToFirebaseStorage(){
         val filename = UUID.randomUUID().toString()
         val ref = FirebaseStorage.getInstance().getReference("/images/$filename")
+        ref.putFile(selectedMediaUri!!)
+                .addOnSuccessListener {
+                    ref.downloadUrl.addOnSuccessListener {
+                        performSendMessage(it.toString())
+                    }
+                }
+    }
 
-        ref.putFile(selectedPhotoUri!!)
+    private fun upLoadVideoToFirebaseStorage(){
+        val filename = UUID.randomUUID().toString()
+        val ref = FirebaseStorage.getInstance().getReference("/video/$filename")
+        ref.putFile(selectedMediaUri!!)
                 .addOnSuccessListener {
                     ref.downloadUrl.addOnSuccessListener {
                         performSendMessage(it.toString())
@@ -144,8 +159,8 @@ class ChatActivity : AppCompatActivity() {
         latestMessageRef.setValue(chatMessage)
         val latestMessageToRef = FirebaseDatabase.getInstance().getReference("/latest-messages/$toId/$fromId")
         latestMessageToRef.setValue(chatMessage)
-
-        iv_send_media.setImageBitmap(null)
+        iv_send_image.setImageBitmap(null)
+        iv_send_video.setVideoURI(null)
     }
 
     private fun fetchCurrentUser() {
@@ -154,7 +169,6 @@ class ChatActivity : AppCompatActivity() {
         ref.addListenerForSingleValueEvent(object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 currentUser = snapshot.getValue(User::class.java)
-
             }
             override fun onCancelled(error: DatabaseError) {
             }

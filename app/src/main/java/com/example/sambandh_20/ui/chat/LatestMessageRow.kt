@@ -31,7 +31,7 @@ class LatestMessageRow(val chatMessage: ChatMessage): Item<ViewHolder>() {
         } else {
             chatPatnerId = chatMessage.fromId
         }
-        Log.d("test", chatPatnerId)
+
         val ref = FirebaseDatabase.getInstance().getReference("/users/$chatPatnerId")
         ref.addListenerForSingleValueEvent(object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {

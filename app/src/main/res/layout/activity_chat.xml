@@ -68,13 +68,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:maxWidth="200dp"/>
 
-    <VideoView
-        android:id="@+id/iv_send_video"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:maxWidth="200dp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_send_chat_log"
-        app:layout_constraintEnd_toEndOf="parent" />
+<!--    <VideoView-->
+<!--        android:id="@+id/iv_send_video"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginEnd="8dp"-->
+<!--        android:layout_marginBottom="8dp"-->
+<!--        android:maxWidth="200dp"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/btn_send_chat_log"-->
+<!--        app:layout_constraintEnd_toEndOf="parent" />-->
 </androidx.constraintlayout.widget.ConstraintLayout>

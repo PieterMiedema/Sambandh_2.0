@@ -40,11 +40,11 @@ class ChatActivity : AppCompatActivity() {
 
         btn_send_chat_log.setOnClickListener {
             if (selectedMediaUri != null) {
-                if (selectedMediaUri.toString().contains("image")) {
+                //if (selectedMediaUri.toString().contains("image")) {
                     upLoadImageToFirebaseStorage()
-                } else  if (selectedMediaUri.toString().contains("video")) {
-                    upLoadVideoToFirebaseStorage()
-                }
+                //} //else  if (selectedMediaUri.toString().contains("video")) {
+                    //upLoadVideoToFirebaseStorage()
+                //}
             } else {
                 performSendMessage("")
             }
@@ -52,7 +52,7 @@ class ChatActivity : AppCompatActivity() {
 
         btn_send_media.setOnClickListener {
             val pickIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-            pickIntent.type = "image/* video/*"
+            pickIntent.type = "image/*"// video/*"
             startActivityForResult(pickIntent, 0)
         }
     }
@@ -65,10 +65,10 @@ class ChatActivity : AppCompatActivity() {
             if (selectedMediaUri.toString().contains("image")) {
                 val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, selectedMediaUri)
                 iv_send_image.setImageBitmap(bitmap)
-            } else  if (selectedMediaUri.toString().contains("video")) {
+            } //else  if (selectedMediaUri.toString().contains("video")) {
 
-                iv_send_video.setVideoURI(selectedMediaUri)
-            }
+                //iv_send_video.setVideoURI(selectedMediaUri)
+            //}
 
         }
     }
@@ -160,7 +160,7 @@ class ChatActivity : AppCompatActivity() {
         val latestMessageToRef = FirebaseDatabase.getInstance().getReference("/latest-messages/$toId/$fromId")
         latestMessageToRef.setValue(chatMessage)
         iv_send_image.setImageBitmap(null)
-        iv_send_video.setVideoURI(null)
+        //iv_send_video.setVideoURI(null)
     }
 
     private fun fetchCurrentUser() {

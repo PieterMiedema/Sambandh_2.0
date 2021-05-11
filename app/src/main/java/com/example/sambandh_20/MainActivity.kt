@@ -19,7 +19,6 @@ class MainActivity : AppCompatActivity() {
         verifyUserLoggedIn()
         setContentView(R.layout.activity_main)
 
-
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.nav_view_bottom)
         val navController = findNavController(R.id.nav_host_fragment)
         bottomNavigationView.setupWithNavController(navController)

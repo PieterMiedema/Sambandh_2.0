@@ -51,7 +51,7 @@ class ChatActivity : AppCompatActivity() {
         }
 
         btn_send_media.setOnClickListener {
-            val pickIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+            val pickIntent = Intent(Intent.ACTION_PICK)
             pickIntent.type = "image/*"// video/*"
             startActivityForResult(pickIntent, 0)
         }
@@ -62,10 +62,10 @@ class ChatActivity : AppCompatActivity() {
 
         if (requestCode == 0 && resultCode == Activity.RESULT_OK && data != null){
             selectedMediaUri = data.data
-            if (selectedMediaUri.toString().contains("image")) {
+            //if (selectedMediaUri.toString().contains("image")) {
                 val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, selectedMediaUri)
                 iv_send_image.setImageBitmap(bitmap)
-            } //else  if (selectedMediaUri.toString().contains("video")) {
+           // } //else  if (selectedMediaUri.toString().contains("video")) {
 
                 //iv_send_video.setVideoURI(selectedMediaUri)
             //}

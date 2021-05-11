@@ -65,6 +65,7 @@ class ChatActivity : AppCompatActivity() {
             //if (selectedMediaUri.toString().contains("image")) {
                 val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, selectedMediaUri)
                 iv_send_image.setImageBitmap(bitmap)
+            //TODO upload video to firebase and load video in container
            // } //else  if (selectedMediaUri.toString().contains("video")) {
 
                 //iv_send_video.setVideoURI(selectedMediaUri)

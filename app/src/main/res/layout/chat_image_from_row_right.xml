@@ -26,7 +26,7 @@
         android:id="@+id/iv_chat_image_from_row_right"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:maxWidth="120dp"
+        android:maxWidth="200dp"
         android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/iv_chat_from_row_right"

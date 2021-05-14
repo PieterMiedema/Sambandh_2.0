@@ -17,4 +17,9 @@
         android:name="com.example.sambandh_20.ui.chat.ChatOverviewFragment"
         android:label="fragment_chat_overview"
         tools:layout="@layout/fragment_chat_overview" />
+    <fragment
+        android:id="@+id/bottom_nav_menu_navigation_preferences"
+        android:name="com.example.sambandh_20.ui.profile.PreferencesFragment"
+        android:label="fragment_chat_overview"
+        tools:layout="@layout/fragment_chat_overview" />
 </navigation>

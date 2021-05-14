@@ -12,7 +12,7 @@
         android:title="@string/bottom_nav_menu_navigation_chat" />
 
     <item
-        android:id="@+id/bottom_nav_menu_navigation_preferances"
+        android:id="@+id/bottom_nav_menu_navigation_preferences"
         android:icon="@drawable/ic_baseline_account_circle_24"
         android:title="@string/bottom_nav_menu_navigation_preferences" />
 

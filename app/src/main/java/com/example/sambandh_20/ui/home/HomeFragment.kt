@@ -7,8 +7,11 @@ import android.service.autofill.OnClickAction
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.example.sambandh_20.ProfileActivity
 import com.example.sambandh_20.R
 import com.example.sambandh_20.ui.matches.MatchesOverviewActivity
+
+
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -25,8 +28,10 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
+
     ): View? {
         return inflater.inflate(R.layout.fragment_home, container, false)
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -35,6 +40,11 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
             val intent = Intent (getActivity(), MatchesOverviewActivity::class.java)
             getActivity()?.startActivity(intent)
         }
+
+       fragment_home_btn_profile.setOnClickListener {
+           val intent = Intent (getActivity(), ProfileActivity::class.java)
+           getActivity()?.startActivity(intent)
+       }
         setUserImage()
     }
 

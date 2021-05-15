@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/orange_gradient"
+    android:textAlignment="gravity"
     tools:context=".ui.register.RegisterActivity">
 
     <EditText
@@ -24,7 +25,6 @@
         app:layout_constraintTop_toBottomOf="@+id/btn_image_register" />
 
 
-
     <EditText
         android:id="@+id/etEmailRegister"
         android:layout_width="0dp"
@@ -38,6 +38,23 @@
         app:layout_constraintEnd_toEndOf="@+id/etDateOfBirthRegister"
         app:layout_constraintStart_toStartOf="@+id/etDateOfBirthRegister"
         app:layout_constraintTop_toBottomOf="@+id/etDateOfBirthRegister" />
+
+    <TextView
+        android:id="@+id/etDateOfBirthRegister"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/rounded_edittext_register_login"
+        android:ems="10"
+        android:gravity="center_vertical|left"
+        android:onClick="openDatePicker"
+        android:paddingLeft="16dp"
+        android:text="@string/register_datebirth"
+        android:textColor="#70000000"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/etDisplayNameRegister"
+        app:layout_constraintStart_toStartOf="@+id/etDisplayNameRegister"
+        app:layout_constraintTop_toBottomOf="@+id/etDisplayNameRegister" />
 
     <EditText
         android:id="@+id/etPasswordRegister"
@@ -57,7 +74,7 @@
         android:id="@+id/btn_register"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/rounded_button"
         android:backgroundTint="@color/india_green"
         android:text="Register"
@@ -101,30 +118,18 @@
         app:layout_constraintBottom_toBottomOf="@+id/btn_image_register"
         app:layout_constraintEnd_toEndOf="@+id/btn_image_register" />
 
-    <Button
-        android:id="@+id/datePickerButton"
-        style="?android:spinnerStyle"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:onClick="openDatePicker"
-        android:text="select birthday"
-        android:textColor="@color/black"
-        android:textSize="30sp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_already_account" />
-
-    <EditText
-        android:id="@+id/etDateOfBirthRegister"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/rounded_edittext_register_login"
-        android:ems="10"
-        android:hint="@string/register_datebirth"
-        android:inputType="text"
-        android:paddingLeft="16dp"
-        app:layout_constraintEnd_toEndOf="@+id/etDisplayNameRegister"
-        app:layout_constraintStart_toStartOf="@+id/etDisplayNameRegister"
-        app:layout_constraintTop_toBottomOf="@+id/etDisplayNameRegister" />
+<!--    <Button-->
+<!--        android:id="@+id/datePickerButton"-->
+<!--        style="?android:spinnerStyle"-->
+<!--        android:layout_width="250dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:background="@drawable/rounded_edittext_register_login"-->
+<!--        android:backgroundTint="@color/white"-->
+<!--        android:onClick="openDatePicker"-->
+<!--        android:text="select birthday"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textSize="30sp"-->
+<!--        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--        app:layout_constraintRight_toRightOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/tv_already_account" />-->
 </androidx.constraintlayout.widget.ConstraintLayout>

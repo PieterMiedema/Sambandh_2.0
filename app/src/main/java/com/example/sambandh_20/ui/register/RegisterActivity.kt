@@ -9,7 +9,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
-import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.sambandh_20.MainActivity
@@ -25,12 +25,14 @@ import java.util.*
 
 class RegisterActivity : AppCompatActivity() {
     private var datePickerDialog: DatePickerDialog? = null
-    private var dateButton: Button? = null
+    private var dateButton: TextView? = null
+    var selectedPhotoUri: Uri? = null
 
     companion object{
-        var minDate: String? = null
-        var givenDate: String? = null
+        var minDate: String = ""
+        var givenDate: String = ""
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         supportActionBar?.title ="Register"
@@ -51,10 +53,8 @@ class RegisterActivity : AppCompatActivity() {
         }
 
         initDatePicker();
-        dateButton = findViewById(R.id.datePickerButton);
+        dateButton = findViewById(R.id.etDateOfBirthRegister);
     }
-
-    var selectedPhotoUri: Uri? = null
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -75,12 +75,11 @@ class RegisterActivity : AppCompatActivity() {
         val password = etPasswordRegister.text.toString()
 
         //field validation
-        if (displayName.isEmpty() || /*dateOfBirth.isEmpty() ||*/ email.isEmpty() || password.isEmpty()) {
+        if (displayName.isEmpty() || dateOfBirth.isNullOrEmpty() || email.isEmpty() || password.isEmpty()) {
             sendToast("The required fields can not be empty"); return
         }
         if (!isUniqueDN(displayName)) { sendToast("Your Displayname is already taken"); return }
-        //if (!dateOfBirth?.let { isDate(it) }!!) { sendToast("The date does not match the required format. Required format: dd/mm/yyyy"); return }
-        //if (selectedPhotoUri == null) { sendToast("Please select a photo") }
+        if (!isOldEnough(dateOfBirth, minDate)) { sendToast("You are too young to use this app."); return }
 
         //create account
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
@@ -115,7 +114,7 @@ class RegisterActivity : AppCompatActivity() {
         val dateOfBirth = givenDate
         val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
 
-        val user = User(uid, profileImageUrL, displayName)//, dateOfBirth)
+        val user = User(uid, profileImageUrL, displayName, dateOfBirth)
         ref.setValue(user)
             .addOnSuccessListener {
                 val intent = Intent(this, MainActivity::class.java)
@@ -124,20 +123,22 @@ class RegisterActivity : AppCompatActivity() {
             }
     }
 
-    //checks if the date is in the correct format
-    private fun isDate(dateOfBirth: String): Boolean {
-        val formatter = SimpleDateFormat("dd/MM/yyyy")
-        val dateObject: Date
+    //compares dateStrings
+    private fun isOldEnough(date: String?, dateMax: String?): Boolean {
+        val formatter = SimpleDateFormat("dd-MM-yyyy")
 
         try{
-            var date= etDateOfBirthRegister.text.toString()
-            dateObject = formatter.parse(date)
-          //  date = SimpleDateFormat("dd/MM/yyyy").format(dateObject)
+            if (!date.isNullOrBlank() || !dateMax.isNullOrBlank()) {
+                val dateObject = formatter.parse(date)
+                val dateLimit = formatter.parse(dateMax)
+                dateLimit.seconds = 1
+                return dateObject.before(dateLimit)!!
+            }
         }
         catch (ex: Exception) {
             return false
         }
-        return true
+        return false
     }
 
     //checks is display name is unique
@@ -145,52 +146,37 @@ class RegisterActivity : AppCompatActivity() {
         return true
     }
 
-    //sends short toast message to the user
-    fun sendToast(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-    }
-
-    //new stuff
-
     private fun initDatePicker() {
+        val cal = Calendar.getInstance()
+        val year = cal[Calendar.YEAR] - 18
+        val month = cal[Calendar.MONTH]
+        val day = cal[Calendar.DAY_OF_MONTH]
+        minDate = makeDateString(day, (month + 1), year)
+
         val dateSetListener = OnDateSetListener { datePicker, year, month, day ->
             var month = month
-            month = month + 1
+            month += 1
             givenDate = makeDateString(day, month, year)
             dateButton!!.text = givenDate
         }
-        val cal = Calendar.getInstance()
-        val year = cal[Calendar.YEAR] -18
-        val month = cal[Calendar.MONTH]
-        val day = cal[Calendar.DAY_OF_MONTH]
-        minDate = makeDateString(day,month, year)
         val style: Int = AlertDialog.THEME_HOLO_LIGHT
         datePickerDialog = DatePickerDialog(this, style, dateSetListener, year, month, day)
-
     }
 
-    private fun makeDateString(day: Int, month: Int, year: Int): String? {
-        return getMonthFormat(day) + " " + month + " " + year
-    }
-
-    private fun getMonthFormat(month: Int): String {
-        if (month == 1) return "JAN"
-        if (month == 2) return "FEB"
-        if (month == 3) return "MAR"
-        if (month == 4) return "APR"
-        if (month == 5) return "MAY"
-        if (month == 6) return "JUN"
-        if (month == 7) return "JUL"
-        if (month == 8) return "AUG"
-        if (month == 9) return "SEP"
-        if (month == 10) return "OCT"
-        if (month == 11) return "NOV"
-        return if (month == 12) "DEC" else "JAN"
-
-        //default should never happen
+    private fun makeDateString(day: Int, month: Int, year: Int): String {
+        var dayStr = day.toString()
+        var monthStr = month.toString()
+        if(dayStr.length == 1) { dayStr = "0" + dayStr; }
+        if(monthStr.length == 1) { monthStr = "0" + monthStr; }
+        return day.toString() + "-" + month.toString() + "-" + year.toString()
     }
 
     fun openDatePicker(view: View?) {
         datePickerDialog!!.show()
+    }
+
+    //sends short toast message to the user
+    fun sendToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }

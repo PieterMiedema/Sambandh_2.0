@@ -11,7 +11,7 @@ import com.example.sambandh_20.ui.matches.MatchesOverviewActivity
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_match.*
 
-class MatchActivity : AppCompatActivity() {
+class MatchProfileActivity : AppCompatActivity() {
 
 
     var user: User? = null

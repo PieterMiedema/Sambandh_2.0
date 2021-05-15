@@ -1,10 +1,11 @@
-package com.example.sambandh_20
+package com.example.sambandh_20.ui.profile
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ArrayAdapter
+import android.widget.Spinner
+import com.example.sambandh_20.R
 import com.example.sambandh_20.model.User
-import com.example.sambandh_20.ui.chat.ChatActivity
-import com.example.sambandh_20.ui.matches.MatchesOverviewActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -24,8 +25,21 @@ class ProfileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
 
-
+        fillProfile()
     }
+
+    private fun fillProfile() {
+        val spinner = findViewById<Spinner>(R.id.spinner_expected_length_stay)
+        ArrayAdapter.createFromResource(
+            this,
+            R.array.list_length_stay,
+            R.layout.custom_spinner_container
+        ).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spinner.adapter = adapter
+        }
+    }
+
     private fun fetchCurrentUser() {
         val uid = FirebaseAuth.getInstance().uid
         val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")

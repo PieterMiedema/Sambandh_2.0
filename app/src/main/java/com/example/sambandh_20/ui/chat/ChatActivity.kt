@@ -18,7 +18,6 @@ import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.activity_chat.*
 import java.util.*
 
-
 class ChatActivity : AppCompatActivity() {
 
     companion object{

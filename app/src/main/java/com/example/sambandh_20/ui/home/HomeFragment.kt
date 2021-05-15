@@ -3,11 +3,10 @@ package com.example.sambandh_20.ui.home
 
 import android.content.Intent
 import android.os.Bundle
-import android.service.autofill.OnClickAction
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.example.sambandh_20.ProfileActivity
+import com.example.sambandh_20.ui.profile.ProfileActivity
 import com.example.sambandh_20.R
 import com.example.sambandh_20.ui.matches.MatchesOverviewActivity
 

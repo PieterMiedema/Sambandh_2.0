@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.sambandh_20.R
 import com.example.sambandh_20.model.User
-import com.example.sambandh_20.ui.profile.MatchActivity
+import com.example.sambandh_20.ui.profile.MatchProfileActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -45,7 +45,7 @@ class MatchesOverviewActivity : AppCompatActivity() {
 
                     val userItem = item as UserItem
 
-                    val intent = Intent(view.context, MatchActivity::class.java)
+                    val intent = Intent(view.context, MatchProfileActivity::class.java)
                     intent.putExtra(USER_KEY, userItem.user)
                     startActivity(intent)
                 }

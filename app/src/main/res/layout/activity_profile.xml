@@ -4,6 +4,176 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProfileActivity">
+    android:background="@drawable/orange_gradient"
+    tools:context=".ui.profile.ProfileActivity">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/select_phote_imageview_register"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:backgroundTint="#FFFFFF"
+        app:civ_border_width="4dp"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_image_register"
+        app:layout_constraintEnd_toEndOf="@+id/btn_image_register" />
+
+    <android.widget.Button
+        android:id="@+id/btn_image_register"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/round_button_image_login"
+        android:backgroundTint="@color/india_green"
+        android:text="select profile picture"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/DisplayNameContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/rounded_edittext_register_login"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/select_phote_imageview_register">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_profile_display_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_edittext_register_login"
+            android:hint="Display name" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/RegionOfOriginContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/rounded_edittext_register_login"
+        app:layout_constraintEnd_toEndOf="@+id/DisplayNameContainer"
+        app:layout_constraintStart_toStartOf="@+id/DisplayNameContainer"
+        app:layout_constraintTop_toBottomOf="@+id/DisplayNameContainer">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_profile_region_origin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_edittext_register_login"
+            android:hint="Region of origin" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/ReligionContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/rounded_edittext_register_login"
+        app:layout_constraintEnd_toEndOf="@+id/DisplayNameContainer"
+        app:layout_constraintStart_toStartOf="@+id/DisplayNameContainer"
+        app:layout_constraintTop_toBottomOf="@+id/RegionOfOriginContainer">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_profile_religion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_edittext_register_login"
+            android:hint="Religion" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/CurrentResidenceContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/rounded_edittext_register_login"
+        app:layout_constraintEnd_toEndOf="@+id/DisplayNameContainer"
+        app:layout_constraintStart_toStartOf="@+id/DisplayNameContainer"
+        app:layout_constraintTop_toBottomOf="@+id/ReligionContainer">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_profile_current_residence"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_edittext_register_login"
+            android:hint="Current city of residence" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Spinner
+        android:id="@+id/spinner_expected_length_stay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:spinnerMode="dropdown"
+        app:layout_constraintEnd_toEndOf="@+id/DisplayNameContainer"
+        app:layout_constraintStart_toStartOf="@+id/DisplayNameContainer"
+        app:layout_constraintTop_toBottomOf="@+id/CurrentResidenceContainer" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/HobbiesContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/rounded_edittext_register_login"
+        app:layout_constraintEnd_toEndOf="@+id/DisplayNameContainer"
+        app:layout_constraintStart_toStartOf="@+id/DisplayNameContainer"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_expected_length_stay">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_profile_hobbies"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_edittext_register_login"
+            android:hint="Hobbies (comma seperated)" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/BiographyContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/rounded_edittext_register_login"
+        app:layout_constraintEnd_toEndOf="@+id/DisplayNameContainer"
+        app:layout_constraintStart_toStartOf="@+id/DisplayNameContainer"
+        app:layout_constraintTop_toBottomOf="@+id/HobbiesContainer">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_profile_biography"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_edittext_register_login"
+            android:hint="Biography (max 280 charactes)"
+            android:maxLength="280"
+            android:minHeight="200dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <android.widget.Button
+        android:id="@+id/btn_register"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/rounded_button"
+        android:backgroundTint="@color/india_green"
+        android:text="Save"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/BiographyContainer" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

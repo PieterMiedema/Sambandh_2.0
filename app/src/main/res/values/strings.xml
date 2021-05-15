@@ -21,7 +21,17 @@
     <string name="invalid_password">Password must be at least 6 characters long</string>
     <string name="login_failed">"Login failed"</string>
     <string name="title_activity_chat">ChatActivity</string>
-    <string name="register_datebirth">Date of birth (dd/mm/yyyy)*</string>
+    <string name="register_datebirth">Date of birth*</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="list_length_stay">
+        <item>1 Year</item>
+        <item>2 Years</item>
+        <item>3 Years</item>
+        <item>4 Years</item>
+        <item>5 Years</item>
+        <item>More than 5 years</item>
+        <item>Indefinately</item>
+    </string-array>
 </resources>

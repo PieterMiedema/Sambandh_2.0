@@ -23,19 +23,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_image_register" />
 
-    <EditText
-        android:id="@+id/etDateOfBirthRegister"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/rounded_edittext_register_login"
-        android:ems="10"
-        android:hint="@string/register_datebirth"
-        android:inputType="text"
-        android:paddingLeft="16dp"
-        app:layout_constraintEnd_toEndOf="@+id/etDisplayNameRegister"
-        app:layout_constraintStart_toStartOf="@+id/etDisplayNameRegister"
-        app:layout_constraintTop_toBottomOf="@+id/etDisplayNameRegister" />
+
 
     <EditText
         android:id="@+id/etEmailRegister"
@@ -113,4 +101,30 @@
         app:layout_constraintBottom_toBottomOf="@+id/btn_image_register"
         app:layout_constraintEnd_toEndOf="@+id/btn_image_register" />
 
+    <Button
+        android:id="@+id/datePickerButton"
+        style="?android:spinnerStyle"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:onClick="openDatePicker"
+        android:text="select birthday"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_already_account" />
+
+    <EditText
+        android:id="@+id/etDateOfBirthRegister"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/rounded_edittext_register_login"
+        android:ems="10"
+        android:hint="@string/register_datebirth"
+        android:inputType="text"
+        android:paddingLeft="16dp"
+        app:layout_constraintEnd_toEndOf="@+id/etDisplayNameRegister"
+        app:layout_constraintStart_toStartOf="@+id/etDisplayNameRegister"
+        app:layout_constraintTop_toBottomOf="@+id/etDisplayNameRegister" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,6 +11,9 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_profile.*
+import kotlinx.android.synthetic.main.fragment_home.*
 
 class ProfileActivity : AppCompatActivity() {
 
@@ -25,6 +28,7 @@ class ProfileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
 
+        setUserImage()
         fillProfile()
     }
 
@@ -49,6 +53,28 @@ class ProfileActivity : AppCompatActivity() {
                 supportActionBar?.title = currentUser?.displayName + "'s profile"
             }
             override fun onCancelled(error: DatabaseError) {
+            }
+        })
+    }
+
+    private fun setUserImage() {
+        val uid = FirebaseAuth.getInstance().uid
+        val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
+        var profileImageUrl: String? = ""
+
+        ref.addListenerForSingleValueEvent(object: ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                profileImageUrl = snapshot.child("profileImageUrL").getValue(String::class.java)
+                if (profileImageUrl!!.isNotEmpty()){
+                    Picasso.get().load(profileImageUrl).into(profile_image_profile)
+                }
+                else {
+                    profile_image_profile.setImageResource(R.drawable.henk)
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+//                sendToast("Something went wrong")
             }
         })
     }

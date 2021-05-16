@@ -78,7 +78,6 @@ class RegisterActivity : AppCompatActivity() {
         if (displayName.isEmpty() || dateOfBirth.isNullOrEmpty() || email.isEmpty() || password.isEmpty()) {
             sendToast("The required fields can not be empty"); return
         }
-        if (!isUniqueDN(displayName)) { sendToast("Your Displayname is already taken"); return }
         if (!isOldEnough(dateOfBirth, minDate)) { sendToast("You are too young to use this app."); return }
 
         //create account
@@ -114,7 +113,7 @@ class RegisterActivity : AppCompatActivity() {
         val dateOfBirth = givenDate
         val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
 
-        val user = User(uid, profileImageUrL, displayName, dateOfBirth)
+        val user = User(uid, profileImageUrL, displayName, dateOfBirth, "", "", "", null, "", "")
         ref.setValue(user)
             .addOnSuccessListener {
                 val intent = Intent(this, MainActivity::class.java)
@@ -139,11 +138,6 @@ class RegisterActivity : AppCompatActivity() {
             return false
         }
         return false
-    }
-
-    //checks is display name is unique
-    private fun isUniqueDN(dn: String): Boolean {
-        return true
     }
 
     private fun initDatePicker() {

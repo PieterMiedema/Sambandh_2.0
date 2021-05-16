@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.sambandh_20.ui.profile.ProfileActivity
 import com.example.sambandh_20.R
+import com.example.sambandh_20.model.User
 import com.example.sambandh_20.ui.matches.MatchesOverviewActivity
 
 
@@ -46,9 +47,6 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
        }
         setUserImage()
     }
-
-
-
 
     private fun setUserImage() {
         val uid = FirebaseAuth.getInstance().uid

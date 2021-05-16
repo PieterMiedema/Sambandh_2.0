@@ -9,7 +9,7 @@ import com.example.sambandh_20.model.User
 import com.example.sambandh_20.ui.chat.ChatActivity
 import com.example.sambandh_20.ui.matches.MatchesOverviewActivity
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_match.*
+import kotlinx.android.synthetic.main.activity_match_profile.*
 
 class MatchProfileActivity : AppCompatActivity() {
 
@@ -17,7 +17,7 @@ class MatchProfileActivity : AppCompatActivity() {
     var user: User? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_match)
+        setContentView(R.layout.activity_match_profile)
         user = intent.getParcelableExtra<User>(MatchesOverviewActivity.USER_KEY)
         supportActionBar?.title = user?.displayName+"'s profile"
         Log.d("user", user.toString())

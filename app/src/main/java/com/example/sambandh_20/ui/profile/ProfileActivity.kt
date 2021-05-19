@@ -100,7 +100,7 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun upLoadImageToFirebaseStorage() {
-        if (selectedPhotoUri == null && currentUser?.profileImageUrL == "") {
+        if (selectedPhotoUri == null) {
             saveUserToFirebaseDatabase("")
             return
         }

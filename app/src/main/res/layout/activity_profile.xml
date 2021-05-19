@@ -50,7 +50,17 @@
             android:background="@drawable/rounded_edittext_register_login"
             android:hint="Display name" />
     </com.google.android.material.textfield.TextInputLayout>
-
+            <Spinner
+                android:id="@+id/spinner_profile_gender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="24dp"
+                android:spinnerMode="dropdown"
+                app:layout_constraintEnd_toEndOf="@+id/DisplayNameContainer"
+                app:layout_constraintStart_toStartOf="@+id/DisplayNameContainer"
+                app:layout_constraintTop_toBottomOf="@+id/DisplayNameContainer" />
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/RegionOfOriginContainer"
         app:boxStrokeWidth="0dp"
@@ -63,7 +73,7 @@
         android:background="@drawable/rounded_edittext_register_login"
         app:layout_constraintEnd_toEndOf="@+id/DisplayNameContainer"
         app:layout_constraintStart_toStartOf="@+id/DisplayNameContainer"
-        app:layout_constraintTop_toBottomOf="@+id/DisplayNameContainer">
+        app:layout_constraintTop_toBottomOf="@+id/spinner_profile_gender">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_profile_region_origin"

@@ -7,86 +7,145 @@
     android:background="@drawable/orange_gradient"
     tools:context=".ui.register.RegisterActivity">
 
-    <EditText
-        android:id="@+id/etDisplayNameRegister"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:background="@drawable/rounded_edittext_register_login"
-        android:ems="10"
-        android:hint="Displayname*"
-        android:inputType="text"
-        android:paddingLeft="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="214dp" />
 
-    <EditText
-        android:id="@+id/etDateOfBirthRegister"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/rounded_edittext_register_login"
-        android:ems="10"
-        android:hint="@string/register_datebirth"
-        android:inputType="text"
-        android:paddingLeft="16dp"
-        app:layout_constraintEnd_toEndOf="@+id/etDisplayNameRegister"
-        app:layout_constraintStart_toStartOf="@+id/etDisplayNameRegister"
-        app:layout_constraintTop_toBottomOf="@+id/etDisplayNameRegister" />
+    <!--    <com.google.android.material.textfield.TextInputLayout-->
+<!--                android:id="@+id/RegionOfOriginContainer"-->
+<!--                app:boxStrokeWidth="0dp"-->
+<!--                app:boxStrokeWidthFocused="0dp"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="24dp"-->
+<!--                android:layout_marginTop="8dp"-->
+<!--                android:layout_marginEnd="24dp"-->
+<!--                android:background="@drawable/rounded_edittext_register_login"-->
+<!--                app:layout_constraintEnd_toEndOf="@+id/DisplayNameContainer"-->
+<!--                app:layout_constraintStart_toStartOf="@+id/DisplayNameContainer"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/DisplayNameContainer">-->
 
-    <EditText
-        android:id="@+id/etEmailRegister"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/rounded_edittext_register_login"
-        android:ems="10"
-        android:hint="E-mail*"
-        android:inputType="text"
-        android:paddingLeft="16dp"
-        app:layout_constraintEnd_toEndOf="@+id/etDateOfBirthRegister"
-        app:layout_constraintStart_toStartOf="@+id/etDateOfBirthRegister"
-        app:layout_constraintTop_toBottomOf="@+id/etDateOfBirthRegister" />
+<!--                <com.google.android.material.textfield.TextInputEditText-->
+<!--                    android:id="@+id/et_profile_region_origin"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:background="@drawable/rounded_edittext_register_login"-->
+<!--                    android:hint="Region of origin" />-->
 
-    <EditText
-        android:id="@+id/etPasswordRegister"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/rounded_edittext_register_login"
-        android:ems="10"
-        android:hint="Password*"
-        android:inputType="textPassword"
-        android:paddingLeft="16dp"
-        app:layout_constraintEnd_toEndOf="@+id/etEmailRegister"
-        app:layout_constraintStart_toStartOf="@+id/etEmailRegister"
-        app:layout_constraintTop_toBottomOf="@+id/etEmailRegister" />
-
-    <android.widget.Button
-        android:id="@+id/btn_register"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/rounded_button"
-        android:backgroundTint="@color/india_green"
-        android:text="Register"
-        app:layout_constraintEnd_toEndOf="@+id/etPasswordRegister"
-        app:layout_constraintStart_toStartOf="@+id/etPasswordRegister"
-        app:layout_constraintTop_toBottomOf="@+id/etPasswordRegister" />
+<!--    </com.google.android.material.textfield.TextInputLayout>-->
 
     <TextView
-        android:id="@+id/tv_already_account"
-        android:layout_width="wrap_content"
+        android:id="@+id/preference_title"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="Already have an account? "
-        android:textSize="16sp"
+        android:layout_marginTop="24dp"
+        android:text="@string/prefences_title"
+        android:textAlignment="center"
+        android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/btn_register"
-        app:layout_constraintHorizontal_bias="0.545"
-        app:layout_constraintStart_toStartOf="@+id/btn_register"
-        app:layout_constraintTop_toBottomOf="@+id/btn_register" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/spinner_gender"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:spinnerMode="dropdown"
+        app:layout_constraintEnd_toEndOf="@+id/preference_title"
+        app:layout_constraintStart_toStartOf="@+id/preference_title"
+        app:layout_constraintTop_toBottomOf="@+id/preference_title" />
+
+    <!--            <com.google.android.material.textfield.TextInputLayout-->
+<!--                android:id="@+id/ReligionContainer"-->
+<!--                app:boxStrokeWidth="0dp"-->
+<!--                app:boxStrokeWidthFocused="0dp"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="24dp"-->
+<!--                android:layout_marginTop="8dp"-->
+<!--                android:layout_marginEnd="24dp"-->
+<!--                android:background="@drawable/rounded_edittext_register_login"-->
+<!--                app:layout_constraintEnd_toEndOf="@+id/DisplayNameContainer"-->
+<!--                app:layout_constraintStart_toStartOf="@+id/DisplayNameContainer"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/RegionOfOriginContainer">-->
+
+<!--                <com.google.android.material.textfield.TextInputEditText-->
+<!--                    android:id="@+id/et_profile_religion"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:background="@drawable/rounded_edittext_register_login"-->
+<!--                    android:hint="Religion" />-->
+<!--            </com.google.android.material.textfield.TextInputLayout>-->
+
+<!--            <com.google.android.material.textfield.TextInputLayout-->
+<!--                android:id="@+id/CurrentResidenceContainer"-->
+<!--                app:boxStrokeWidth="0dp"-->
+<!--                app:boxStrokeWidthFocused="0dp"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="24dp"-->
+<!--                android:layout_marginTop="8dp"-->
+<!--                android:layout_marginEnd="24dp"-->
+<!--                android:background="@drawable/rounded_edittext_register_login"-->
+<!--                app:layout_constraintEnd_toEndOf="@+id/DisplayNameContainer"-->
+<!--                app:layout_constraintStart_toStartOf="@+id/DisplayNameContainer"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/ReligionContainer">-->
+
+<!--                <com.google.android.material.textfield.TextInputEditText-->
+<!--                    android:id="@+id/et_profile_current_residence"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:background="@drawable/rounded_edittext_register_login"-->
+<!--                    android:hint="Current city of residence" />-->
+
+<!--            </com.google.android.material.textfield.TextInputLayout>-->
+
+<!--            <Spinner-->
+<!--                android:id="@+id/spinner_expected_length_stay"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="24dp"-->
+<!--                android:layout_marginTop="8dp"-->
+<!--                android:layout_marginEnd="24dp"-->
+<!--                android:spinnerMode="dropdown"-->
+<!--                app:layout_constraintEnd_toEndOf="@+id/DisplayNameContainer"-->
+<!--                app:layout_constraintStart_toStartOf="@+id/DisplayNameContainer"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/CurrentResidenceContainer" />-->
+
+<!--    <android.widget.Button-->
+<!--        android:id="@+id/btn_save_profile"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:background="@drawable/rounded_button"-->
+<!--        android:backgroundTint="@color/india_green"-->
+<!--        android:text="Save"-->
+<!--        tools:layout_editor_absoluteX="48dp"-->
+<!--        tools:layout_editor_absoluteY="286dp" />-->
+
+<!--    <com.google.android.material.textfield.TextInputLayout-->
+<!--                android:id="@+id/HobbiesContainer"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="24dp"-->
+<!--                android:layout_marginTop="8dp"-->
+<!--                android:layout_marginEnd="24dp"-->
+<!--                app:boxStrokeWidth="0dp"-->
+<!--                app:boxStrokeWidthFocused="0dp"-->
+<!--                android:background="@drawable/rounded_edittext_register_login"-->
+<!--                app:layout_constraintEnd_toEndOf="@+id/DisplayNameContainer"-->
+<!--                app:layout_constraintStart_toStartOf="@+id/DisplayNameContainer"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/spinner_expected_length_stay">-->
+
+<!--                <com.google.android.material.textfield.TextInputEditText-->
+<!--                    android:id="@+id/et_profile_hobbies"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:background="@drawable/rounded_edittext_register_login"-->
+<!--                    android:hint="Hobbies" />-->
+
+<!--    </com.google.android.material.textfield.TextInputLayout>-->
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

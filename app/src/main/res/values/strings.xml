@@ -22,6 +22,9 @@
     <string name="login_failed">"Login failed"</string>
     <string name="title_activity_chat">ChatActivity</string>
     <string name="register_datebirth">Date of birth*</string>
+    <string name="match_profile_hobbies">Hobbies:</string>
+    <string name="match_profile_bio">Biography:</string>
+    <string name="prefences_title">Please fill in your preferences</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
@@ -33,5 +36,12 @@
         <item>5 Years</item>
         <item>More than 5 years</item>
         <item>Indefinately</item>
+    </string-array>
+
+    <string-array name="genders">
+        <item>Male</item>
+        <item>Female</item>
+        <item>Non Binary</item>
+        <item>Other</item>
     </string-array>
 </resources>

@@ -10,11 +10,9 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
-import androidx.core.view.get
 import com.example.sambandh_20.MainActivity
 import com.example.sambandh_20.R
 import com.example.sambandh_20.model.User
-import com.example.sambandh_20.ui.register.RegisterActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -23,8 +21,6 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_profile.*
-import kotlinx.android.synthetic.main.activity_register.*
-import kotlinx.android.synthetic.main.fragment_home.*
 import java.util.*
 
 class ProfileActivity : AppCompatActivity() {
@@ -52,7 +48,7 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun fillProfile() {
-        fillSpinner()
+        fillSpinners()
         setUserImage()
         et_profile_display_name.setText(currentUser?.displayName, TextView.BufferType.EDITABLE)
         et_profile_region_origin.setText(currentUser?.regionOfOrigin, TextView.BufferType.EDITABLE)
@@ -62,6 +58,9 @@ class ProfileActivity : AppCompatActivity() {
         et_profile_biography.setText(currentUser?.biography, TextView.BufferType.EDITABLE)
         if (currentUser?.expectedStay != null) {
             spinner_expected_length_stay.setSelection(currentUser?.expectedStay!!)
+        }
+        if (currentUser?.gender != null) {
+            spinner_profile_gender.setSelection(currentUser?.gender!!)
         }
     }
 
@@ -76,15 +75,25 @@ class ProfileActivity : AppCompatActivity() {
         upLoadImageToFirebaseStorage()
     }
 
-    private fun fillSpinner() {
-        val spinner = findViewById<Spinner>(R.id.spinner_expected_length_stay)
+    private fun fillSpinners() {
+        val spinnerGender = findViewById<Spinner>(R.id.spinner_profile_gender)
+        ArrayAdapter.createFromResource(
+                this,
+                R.array.genders,
+                R.layout.custom_spinner_container
+        ).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spinnerGender.adapter = adapter
+        }
+
+        val spinnerLenghtOfStay = findViewById<Spinner>(R.id.spinner_expected_length_stay)
         ArrayAdapter.createFromResource(
                 this,
                 R.array.list_length_stay,
                 R.layout.custom_spinner_container
         ).also { adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            spinner.adapter = adapter
+            spinnerLenghtOfStay.adapter = adapter
         }
     }
 
@@ -132,6 +141,7 @@ class ProfileActivity : AppCompatActivity() {
         val expectedStay = spinner_expected_length_stay.selectedItemId.toInt()
         val hobbies = et_profile_hobbies.text.toString()
         val biography = et_profile_biography.text.toString()
+        val gender = spinner_profile_gender.selectedItemId.toInt()
         val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
 
         var actualProfileImageURL = profileImageUrL
@@ -139,7 +149,7 @@ class ProfileActivity : AppCompatActivity() {
             actualProfileImageURL = currentUser?.profileImageUrL!!
         }
 
-        val user = User(uid, actualProfileImageURL, displayName, dateOfBirth, regionOfOrigin, religion, currentResidence, expectedStay, hobbies, biography)
+        val user = User(uid, actualProfileImageURL, displayName, dateOfBirth, regionOfOrigin, religion, currentResidence, expectedStay, hobbies, biography, gender)
         ref.setValue(user)
                 .addOnSuccessListener {
                     val intent = Intent(this, MainActivity::class.java)

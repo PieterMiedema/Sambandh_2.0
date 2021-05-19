@@ -32,6 +32,7 @@ class MatchProfileActivity : AppCompatActivity() {
     }
 
     private fun fillProfile() {
+
         if (user?.profileImageUrL!!.isNotEmpty()){
             Picasso.get().load(user?.profileImageUrL).into(imageview_match_profile)
         }
@@ -39,6 +40,8 @@ class MatchProfileActivity : AppCompatActivity() {
             imageview_match_profile.setImageResource(R.drawable.henk)
         }
         tv_match_profile_name.text= user?.displayName
+        tv_match_profile_bio.text = user?.biography
+        tv_match_profile_hobies.text = user?.hobbies
     }
 
 }

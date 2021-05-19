@@ -113,7 +113,7 @@ class RegisterActivity : AppCompatActivity() {
         val dateOfBirth = givenDate
         val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
 
-        val user = User(uid, profileImageUrL, displayName, dateOfBirth, "", "", "", null, "", "")
+        val user = User(uid, profileImageUrL, displayName, dateOfBirth, "", "", "", null, "", "", null)
         ref.setValue(user)
             .addOnSuccessListener {
                 val intent = Intent(this, MainActivity::class.java)

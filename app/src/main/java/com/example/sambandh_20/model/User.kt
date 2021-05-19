@@ -7,6 +7,6 @@ import kotlinx.android.parcel.Parcelize
 data class User(val uid: String, val profileImageUrL: String, val displayName: String,
                 val dateOfBirth: String, val regionOfOrigin: String, val religion: String,
                 val currentResidence: String, val expectedStay: Int?, val hobbies: String,
-                val biography: String): Parcelable {
-    constructor() : this("","","",  "", "", "", "", null, "", "")
+                val biography: String, val gender: Int?): Parcelable {
+    constructor() : this("","","",  "", "", "", "", null, "", "",null)
 }

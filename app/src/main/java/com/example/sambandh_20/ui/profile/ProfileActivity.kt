@@ -114,21 +114,16 @@ class ProfileActivity : AppCompatActivity() {
             return
         }
 
-        if (!currentUser?.profileImageUrL.isNullOrBlank()) {
-            val filename = UUID.randomUUID().toString()
-            val ref = FirebaseStorage.getInstance().getReference("/images/$filename")
+        val filename = UUID.randomUUID().toString()
+        val ref = FirebaseStorage.getInstance().getReference("/images/$filename")
 
-            ref.putFile(selectedPhotoUri!!)
-                    .addOnSuccessListener {
-                        ref.downloadUrl.addOnSuccessListener {
-                            it.toString()
-                            saveUserToFirebaseDatabase(it.toString())
-                        }
+        ref.putFile(selectedPhotoUri!!)
+                .addOnSuccessListener {
+                    ref.downloadUrl.addOnSuccessListener {
+                        it.toString()
+                        saveUserToFirebaseDatabase(it.toString())
                     }
-        }
-        else {
-            saveUserToFirebaseDatabase("")
-        }
+                }
     }
 
     private fun saveUserToFirebaseDatabase(profileImageUrL: String){

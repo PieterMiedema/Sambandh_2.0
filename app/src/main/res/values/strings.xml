@@ -44,4 +44,12 @@
         <item>Non Binary</item>
         <item>Other</item>
     </string-array>
+
+    <string-array name="genders_pref">
+        <item>Male</item>
+        <item>Female</item>
+        <item>Both</item>
+        <item>Non Binary</item>
+        <item>Other</item>
+    </string-array>
 </resources>

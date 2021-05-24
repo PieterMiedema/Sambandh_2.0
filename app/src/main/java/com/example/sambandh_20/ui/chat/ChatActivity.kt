@@ -151,7 +151,7 @@ class ChatActivity : AppCompatActivity() {
         reference.setValue(chatMessage)
                 .addOnSuccessListener {
                     et_chat_log.text.clear()
-                    rv_chat_log.scrollToPosition(adapter.itemCount -1)
+                    rv_chat_log.scrollToPosition(adapter.itemCount -2)
                 }
         toReference.setValue(chatMessage)
 
@@ -160,6 +160,7 @@ class ChatActivity : AppCompatActivity() {
         val latestMessageToRef = FirebaseDatabase.getInstance().getReference("/latest-messages/$toId/$fromId")
         latestMessageToRef.setValue(chatMessage)
         iv_send_image.setImageBitmap(null)
+        selectedMediaUri = null
         //iv_send_video.setVideoURI(null)
     }
 
